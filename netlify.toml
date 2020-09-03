@@ -1,0 +1,4 @@
+[build.environment]
+  SPACES_CDN_ENDPOINT = "https://memebot.nyc3.cdn.digitaloceanspaces.com"
+  SPACES_ENDPOINT = "https://memebot.nyc3.digitaloceanspaces.com"
+
