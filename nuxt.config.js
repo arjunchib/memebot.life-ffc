@@ -5,6 +5,7 @@ export default {
   target: "static",
   modules: ["@nuxt/http"],
   buildModules: ["@nuxtjs/dotenv"],
+  plugins: ["~/plugins/audio.client.js"],
   http: {
     browserBaseURL: process.env.SPACES_CDN_ENDPOINT,
     baseURL: process.env.SPACES_ENDPOINT,

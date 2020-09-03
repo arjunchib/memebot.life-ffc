@@ -12,14 +12,11 @@ export default {
       type: Object,
       default: () => {},
     },
-    audio: {
-      required: true,
-    },
   },
   methods: {
     play() {
       const url = `${process.env.SPACES_CDN_ENDPOINT}/memebot/audio/${this.data.name}.opus`;
-      this.audio.src = url;
+      this.$audio.play(url);
     },
   },
 };
