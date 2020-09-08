@@ -14,4 +14,8 @@ export default {
   env: {
     SPACES_CDN_ENDPOINT: process.env.SPACES_CDN_ENDPOINT,
   },
+  head: {
+    title: "memebot",
+    link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+  },
 };
