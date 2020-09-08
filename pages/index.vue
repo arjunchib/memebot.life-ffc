@@ -6,7 +6,7 @@
         href="https://discord.com/oauth2/authorize?client_id= 350733228098715658&scope=bot&permissions=3147840"
         >Add to Discord</a
       >
-      <a href="https://ko-fi.com/memebot">Buy me a Coffee!</a>
+      <a href="https://paypal.me/arjunchib">Send me some money!</a>
     </header>
     <main class="memes">
       <Meme v-for="meme in memes" :key="meme.name" :data="meme" />
