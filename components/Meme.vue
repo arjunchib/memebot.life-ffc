@@ -124,8 +124,7 @@ export default {
   left: 0;
   height: 100%;
   width: 0%;
-  background: red;
-  opacity: 0.5;
+  background: #fa2539;
   z-index: -1;
   animation-timing-function: linear;
   animation-iteration-count: 1;
