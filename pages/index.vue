@@ -23,6 +23,13 @@ export default {
   },
   async created() {
     this.memes = await this.$http.$get("/memebot/memes.json");
+    this.memes.sort((a, b) =>
+      a.name.localeCompare(b.name, "en", {
+        sensitivity: "base",
+        ignorePunctuation: true,
+        numeric: true,
+      })
+    );
   },
 };
 </script>
