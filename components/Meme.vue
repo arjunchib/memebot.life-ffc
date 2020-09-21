@@ -1,8 +1,8 @@
 <template>
   <button class="meme" @click="play" @mousemove="mousemove">
-    <div ref="progressBar" class="progress-bar" @animationend="animationend" />
+    <div ref="progressBar" class="progress-bar" @animationend="stop" />
     <div>
-      <p class="name">{{ data.name }}</p>
+      <p class="name" :title="data.name">{{ data.name }}</p>
       <p class="aliases">{{ data.aliases.join(", ") }}</p>
     </div>
     <ul class="tags">
@@ -26,12 +26,14 @@ export default {
     };
   },
   methods: {
-    animationend(event) {
+    stop() {
       this.isPlaying = false;
-      setTimeout(() => (event.target.style.animationName = ""), 0);
+      setTimeout(() => (this.$refs.progressBar.style.animationName = ""), 0);
     },
     play() {
       const url = `${process.env.SPACES_CDN_ENDPOINT}/memebot/audio/${this.data.name}.opus`;
+      this.$bus.$emit("play");
+      this.$bus.$once("play", this.stop);
       this.$audio.addEventListener(
         "canplaythrough",
         () => {
