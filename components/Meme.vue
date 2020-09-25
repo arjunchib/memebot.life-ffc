@@ -1,5 +1,5 @@
 <template>
-  <button class="meme" @click="play" @mousemove="mousemove">
+  <button class="meme" @click="play">
     <div ref="progressBar" class="progress-bar" @animationend="stop" />
     <div>
       <p class="name" :title="data.name">{{ data.name }}</p>
@@ -46,23 +46,6 @@ export default {
         { once: true }
       );
       this.$audio.src = url;
-    },
-    mousemove(event) {
-      if (this.isPlaying || !event.target.getBoundingClientRect) return;
-      const { clientX, clientY } = event;
-      const {
-        x: targetX,
-        y: targetY,
-        width,
-        height,
-      } = event.target.getBoundingClientRect();
-      const x = clientX - targetX - width / 2;
-      const y = clientY - targetY - height / 2;
-      const xNorm = x / (width / 2);
-      const yNorm = y / (height / 2);
-      this.$el.style.transform = `perspective(50em) rotateY(${
-        xNorm * 7
-      }deg) rotateX(${-yNorm * 7}deg)`;
     },
   },
 };
