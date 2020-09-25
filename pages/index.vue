@@ -9,6 +9,7 @@
       <a href="https://paypal.me/arjunchib">Send me some money!</a>
     </header>
     <main>
+      <input v-model="searchString" type="text" />
       <select v-model="selectedTag">
         <option>all</option>
         <option v-for="tag in tags" :key="tag">{{ tag }}</option>
@@ -21,11 +22,14 @@
 </template>
 
 <script>
+import { distance } from "fastest-levenshtein";
+
 export default {
   data() {
     return {
       memes: [],
       selectedTag: "all",
+      searchString: "",
     };
   },
   computed: {
@@ -39,6 +43,19 @@ export default {
       let memes = this.memes;
       if (this.selectedTag !== "all") {
         memes = memes.filter((meme) => meme.tags.includes(this.selectedTag));
+      }
+      if (this.searchString.length >= 2) {
+        memes = memes.filter((meme) => {
+          const commands = [meme.name, ...meme.aliases];
+          const scores = commands.map((cmd) =>
+            distance(cmd, this.searchString)
+          );
+          const score = Math.max(...scores);
+          meme._searchScore = score;
+          return score < 3;
+        });
+        memes.sort((a, b) => a._searchScore - b._searchScore);
+        console.log(memes);
       }
       return memes;
     },
