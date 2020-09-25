@@ -8,8 +8,14 @@
       >
       <a href="https://paypal.me/arjunchib">Send me some money!</a>
     </header>
-    <main class="memes">
-      <Meme v-for="meme in memes" :key="meme.name" :data="meme" />
+    <main>
+      <select v-model="selectedTag">
+        <option>all</option>
+        <option v-for="tag in tags" :key="tag">{{ tag }}</option>
+      </select>
+      <div class="memes">
+        <Meme v-for="meme in filteredMemes" :key="meme.name" :data="meme" />
+      </div>
     </main>
   </div>
 </template>
@@ -19,7 +25,23 @@ export default {
   data() {
     return {
       memes: [],
+      selectedTag: "all",
     };
+  },
+  computed: {
+    tags() {
+      return this.memes.reduce((acc, value) => {
+        value.tags.forEach((tag) => acc.add(tag));
+        return acc;
+      }, new Set());
+    },
+    filteredMemes() {
+      let memes = this.memes;
+      if (this.selectedTag !== "all") {
+        memes = memes.filter((meme) => meme.tags.includes(this.selectedTag));
+      }
+      return memes;
+    },
   },
   async created() {
     this.memes = await this.$http.$get("/memebot/memes.json");
