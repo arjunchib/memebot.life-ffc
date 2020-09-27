@@ -9,6 +9,7 @@
   "dependencies": {
     "@nuxt/http": "^0.5.12",
     "fastest-levenshtein": "^1.0.12",
+    "lodash-es": "^4.17.15",
     "nuxt": "^2.14.3"
   },
   "devDependencies": {

@@ -1,11 +1,15 @@
 <template>
-  <button class="meme" @click="play">
+  <!-- v-once means the component will not update -->
+  <button v-once class="meme" @click="play">
     <div ref="progressBar" class="progress-bar" @animationend="stop" />
     <div>
       <p class="name" :title="data.name">{{ data.name }}</p>
-      <p class="aliases">{{ data.aliases.join(", ") }}</p>
+      <p v-if="data.aliases.length > 0" class="aliases">
+        <span style="font-size: 0">aliases: </span>{{ data.aliases.join(", ") }}
+      </p>
     </div>
-    <ul class="tags">
+    <p v-if="data.tags.length > 0" style="font-size: 0">tags:</p>
+    <ul v-if="data.tags.length > 0" class="tags">
       <li v-for="tag in data.tags" :key="tag" class="tag">{{ tag }}</li>
     </ul>
   </button>
@@ -66,7 +70,7 @@ export default {
 .meme {
   all: unset;
   display: flex;
-  width: 200px;
+  width: 100%;
   height: 100px;
   padding: 10px;
   box-sizing: border-box;
