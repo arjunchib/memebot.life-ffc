@@ -4,14 +4,7 @@
     <div ref="progressBar" class="progress-bar" @animationend="stop" />
     <div>
       <p class="name" :title="data.name">{{ data.name }}</p>
-      <p v-if="data.aliases.length > 0" class="aliases">
-        <span style="font-size: 0">aliases: </span>{{ data.aliases.join(", ") }}
-      </p>
     </div>
-    <p v-if="data.tags.length > 0" style="font-size: 0">tags:</p>
-    <ul v-if="data.tags.length > 0" class="tags">
-      <li v-for="tag in data.tags" :key="tag" class="tag">{{ tag }}</li>
-    </ul>
   </button>
 </template>
 
@@ -68,42 +61,7 @@ export default {
 
 <style scoped>
 .meme {
-  all: unset;
-  display: flex;
-  width: 100%;
-  height: 100px;
-  padding: 10px;
-  box-sizing: border-box;
   cursor: pointer;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 100ms linear, box-shadow 300ms linear;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 2px solid black;
-  box-shadow: 0px 15px 35px rgba(50, 50, 93, 0.1),
-    0px 5px 15px rgba(0, 0, 0, 0.0007);
-}
-
-.meme:hover {
-  box-shadow: 0px 5px 5px rgba(50, 50, 93, 0.1),
-    0px 5px 5px rgba(0, 0, 0, 0.0007);
-}
-
-.meme:not(:hover) {
-  transform: none !important;
-}
-
-.meme:active {
-  transition: transform 150ms linear, background 150ms linear;
-  transform: perspective(50em) scale(99%) !important;
-}
-
-.meme:focus {
-  background: black;
-  color: white;
 }
 
 .progress-bar {
@@ -119,44 +77,10 @@ export default {
   animation-iteration-count: 1;
 }
 
-p {
-  margin: 0;
-}
-
 .name {
   font-weight: 600;
   text-overflow: ellipsis;
   width: 100%;
   overflow: hidden;
-}
-
-.aliases {
-  font-weight: 400;
-  font-style: italic;
-  font-size: 0.8em;
-}
-
-.tags {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-}
-
-.tag {
-  font-size: 0.8em;
-  font-weight: 400;
-  display: block;
-  padding: 0.2em 0.5em;
-  border-radius: 1em;
-  background: black;
-  width: auto;
-  color: white;
-  margin: 0.2em 0.2em 0 0;
-}
-
-.meme:focus .tag {
-  background: white;
-  color: black;
 }
 </style>
